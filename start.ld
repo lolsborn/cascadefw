@@ -17,6 +17,8 @@ SECTIONS {
         _etext = .;
         _sidata = _etext;
     } >FLASH
+    .eh_frame_hdr : { *(.eh_frame_hdr) *(.eh_frame_entry .eh_frame_entry.*) }
+    .eh_frame       : ONLY_IF_RO { KEEP (*(.eh_frame)) *(.eh_frame.*) }
     .data : AT ( _sidata )
     {
         . = ALIGN(4);
