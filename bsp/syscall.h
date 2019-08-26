@@ -1,16 +1,12 @@
-/* Copyright (c) 2017  SiFive Inc. All rights reserved.
-
-   This copyrighted material is made available to anyone wishing to use,
-   modify, copy, or redistribute it subject to the terms and conditions
-   of the FreeBSD License.   This program is distributed in the hope that
-   it will be useful, but WITHOUT ANY WARRANTY expressed or implied,
-   including the implied warranties of MERCHANTABILITY or FITNESS FOR
-   A PARTICULAR PURPOSE.  A copy of this license is available at
-   http://www.opensource.org/licenses.
-*/
-
 #ifndef _MACHINE_SYSCALL_H
 #define _MACHINE_SYSCALL_H
+
+#include "stdint.h"
+
+#define reg_spictrl (*(volatile uint32_t*)0x02000000)
+#define reg_uart_clkdiv (*(volatile uint32_t*)0x02000004)
+#define reg_uart_data (*(volatile uint32_t*)0x02000008)
+#define reg_leds (*(volatile uint32_t*)0x03000000)
 
 #define SYS_getcwd 17
 #define SYS_dup 23

@@ -1,10 +1,13 @@
 MEMORY
 {
     FLASH (rx) : ORIGIN = 0x00100000, LENGTH = 0x400000
-    RAM (xrw) : ORIGIN = 0x00000000, LENGTH = 0x20000
+    RAM (xrw) : ORIGIN = 0x00000000, LENGTH = 0x40000
 }
-SECTIONS {
-    .text :
+SECTIONS
+{
+  /* Read-only sections, merged into text segment: */
+  PROVIDE (__executable_start = SEGMENT_START("text-segment", 0x10000));
+  .text :
     {
         . = ALIGN(4);
         *(.text)
@@ -17,8 +20,6 @@ SECTIONS {
         _etext = .;
         _sidata = _etext;
     } >FLASH
-    .eh_frame_hdr : { *(.eh_frame_hdr) *(.eh_frame_entry .eh_frame_entry.*) }
-    .eh_frame       : ONLY_IF_RO { KEEP (*(.eh_frame)) *(.eh_frame.*) }
     .data : AT ( _sidata )
     {
         . = ALIGN(4);
